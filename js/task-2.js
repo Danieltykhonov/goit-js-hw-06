@@ -1,104 +1,55 @@
 'use strict';
 
-// Оголоси стрілочну функцію getUsersWithFriend, яка очікує два параметри:
-
-// const getUsersWithFriend = (users, friendName) => {
-
-//     if(users.includes() === friendName){
-
-//         return allUsers.filter((user) => user.name)
-//     } else{
-
-//         return [];
-//     }
-
-
-     
-
-
-   
-
-
-// }
-
-// users — масив об'єктів користувачів
-// friendName — ім'я друга для пошуку
-
-
-// Функція повертає масив усіх користувачів із масиву users, у яких є друг з іменем friendName. 
-// Друзі кожного користувача зберігаються у властивості friends. Якщо користувачів з таким другом немає,
-//  функція повертає порожній масив.
+// Задача 2. Склад
 
 
 
-// Поради:
-
-// Метод filter() можна використовувати для створення нового масиву з елементами, які задовольняють певну умову.
-// Використовуй метод includes() для перевірки, чи масив friends містить friendName.
+// Виконуй це завдання у файлі task-2.js
 
 
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+// Створи клас Storage, який створюватиме об'єкти для управління складом товарів. Клас очікує лише один аргумент — початковий масив товарів, який записується до створеного об'єкта в приватну властивість items.
 
 
-const getUsersWithFriend = (users, friendName) =>
-  users.filter((user) => user.friends.includes(friendName));
 
-const allUsers = [
-  {
-    name: "Moore Hensley",
-    friends: ["Sharron Pace"]
-  },
-  {
-    name: "Sharlene Bush",
-    friends: ["Briana Decker", "Sharron Pace"]
-  },
-  {
-    name: "Ross Vazquez",
-    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"]
-  },
-  {
-    name: "Elma Head",
-    friends: ["Goldie Gentry", "Aisha Tran"]
-  },
-  {
-    name: "Carey Barr",
-    friends: ["Jordan Sampson", "Eddie Strong"]
-  },
-  {
-    name: "Blackburn Dotson",
-    friends: ["Jacklyn Lucas", "Linda Chapman"]
-  },
-  {
-    name: "Sheree Anthony",
-    friends: ["Goldie Gentry", "Briana Decker"]
+// Оголоси такі методи класу:
+
+// getItems() — повертає масив поточних товарів у приватній властивості items.
+// addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів у приватну властивість items об'єкта.
+// removeItem(itemToRemove) — приймає рядок з назвою товару itemToRemove і видаляє його з масиву товарів у приватній властивості items об'єкта.
+
+
+// Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для перевірки коректності роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
+
+
+class Storage {
+  #items;
+
+  constructor(items) {
+    this.#items = items;
   }
-];
 
-console.log(getUsersWithFriend(allUsers, "Briana Decker")); 
-// [
-//   {
-//     name: "Sharlene Bush",
-//     friends: ["Briana Decker", "Sharron Pace"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+  getItems() {
+    return this.#items;
+  }
 
-console.log(getUsersWithFriend(allUsers, "Goldie Gentry"));
-// [
-//   {
-//     name: "Elma Head",
-//     friends: ["Goldie Gentry", "Aisha Tran"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
 
-console.log(getUsersWithFriend(allUsers, "Adrian Cross" )); // []
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter((item) => item !== itemToRemove);
+  }
+}
+
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
 
 // Залиш цей код для перевірки ментором.
 
@@ -106,12 +57,15 @@ console.log(getUsersWithFriend(allUsers, "Adrian Cross" )); // []
 
 // Вимоги
 
-// Оголошено змінну getUsersWithFriend.
-// Змінній getUsersWithFriend присвоєно стрілочну функцію з параметрами (users, friendName).
-// Для перебирання параметра users використано метод filter().
-// Якщо значення параметра friendName — рядок "Briana Decker", функція повертає масив об'єктів користувачів з іменами Sharlene Bush і Sheree Anthony.
-// Якщо значення параметра friendName — рядок "Goldie Gentry", функція повертає масив об'єктів користувачів з іменами Elma Head і Sheree Anthony.
-// Якщо значення параметра friendName — рядок "Adrian Cross", функція повертає порожній масив.
-// Виклик з будь-якими валідними аргументами повертає правильне значення.
+// Оголошено клас Storage.
+// У класі Storage оголошено методи getItems, addItem і removeItem.
+// Властивість items у класі Storage оголошена приватною.
+// Метод getItems повертає значення приватної властивості items екземпляра класу, який його викликає.
+// Метод addItem змінює значення приватної властивості items екземпляра класу, який його викликає.
+// Метод removeItem змінює значення приватної властивості items екземпляра класу, який його викликає.
+// У результаті виклику new Storage(["Nanitoids", "Prolonger", "Antigravitator"]) значення змінної storage — об'єкт.
+// В об'єкта storage немає публічної властивості items.
+// Перший виклик storage.getItems() одразу після ініціалізації екземпляра повертає масив ["Nanitoids", "Prolonger", "Antigravitator"].
+// Другий виклик storage.getItems() після виклику storage.addItem("Droid") повертає масив ["Nanitoids", "Prolonger", "Antigravitator", "Droid"].
+// Третій виклик storage.getItems() після виклику storage.removeItem("Prolonger") повертає масив ["Nanitoids", "Antigravitator", "Droid"].
 // Результати всіх викликів виведено в консоль.
-

@@ -1,97 +1,64 @@
 'use strict';
 
 
+// Задача 3. Конструктор рядків
+
+
+
 // Виконуй це завдання у файлі task-3.js
 
 
-// Оголоси стрілочну функцію sortByDescendingFriendCount, 
-// яка очікує один параметр users — масив об'єктів користувачів.
-//  Функція повертає масив усіх користувачів, відсортованих за спаданням кількості їхніх друзів (властивість friends).
+// Напиши клас StringBuilder, який приймає один параметр initialValue — довільний рядок, який записується у приватну властивість value об'єкта, що створюється.
 
 
-const sortByDescendingFriendCount = (users) =>
-  users.toSorted((a, b) => b.friends.length - a.friends.length);
+
+// Оголоси такі методи класу:
+
+// getValue() — повертає поточне значення приватної властивості value.
+// padEnd(str) — отримує параметр str (рядок) і додає його в кінець значення приватної властивості value об'єкта, який викликає цей метод.
+// padStart(str) — отримує параметр str (рядок) і додає його на початок значення приватної властивості value об'єкта, який викликає цей метод.
+// padBoth(str) — отримує параметр str (рядок) і додає його на початок і в кінець значення приватної властивості value об'єкта, який викликає цей метод.
 
 
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+// Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для перевірки коректності роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
 
-console.log(
-  sortByDescendingFriendCount([
-    {
-      name: "Moore Hensley",
-      friends: ["Sharron Pace"],
-      gender: "male"
-    },
-    {
-      name: "Sharlene Bush",
-      friends: ["Briana Decker", "Sharron Pace"],
-      gender: "female"
-    },
-    {
-      name: "Ross Vazquez",
-      friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
-      gender: "male"
-    },
-    {
-      name: "Elma Head",
-      friends: ["Goldie Gentry", "Aisha Tran"],
-      gender: "female"
-    },
-    {
-      name: "Carey Barr",
-      friends: ["Jordan Sampson", "Eddie Strong"],
-      gender: "male"
-    },
-    {
-      name: "Blackburn Dotson",
-      friends: ["Jacklyn Lucas", "Linda Chapman"],
-      gender: "male"
-    },
-    {
-      name: "Sheree Anthony",
-      friends: ["Goldie Gentry", "Briana Decker"],
-      gender: "female"
-    }
-  ])
-);
 
-// [
-//   {
-//     name: "Ross Vazquez",
-//     friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Sharlene Bush",
-//     friends: ["Briana Decker", "Sharron Pace"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Elma Head",
-//     friends: ["Goldie Gentry", "Aisha Tran"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Carey Barr",
-//     friends: ["Jordan Sampson", "Eddie Strong"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Blackburn Dotson",
-//     friends: ["Jacklyn Lucas", "Linda Chapman"],
-//     gender: "male"
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"],
-//     gender: "female"
-//   },
-//   {
-//     name: "Moore Hensley",
-//     friends: ["Sharron Pace"],
-//     gender: "male"
-//   }
-// ]
+class StringBuilder {
+  #value;
+
+  constructor(initialValue) {
+    this.#value = initialValue;
+  }
+
+  getValue() {
+    return this.#value;
+  }
+
+  padEnd(str) {
+    this.#value = this.#value + str;
+  }
+
+  padStart(str) {
+    this.#value = str + this.#value;
+  }
+
+  padBoth(str) {
+    this.#value = str + this.#value + str;
+  }
+}
+
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
+
 
 // Залиш цей код для перевірки ментором.
 
@@ -99,9 +66,15 @@ console.log(
 
 // Вимоги
 
-// Оголошено змінну sortByDescendingFriendCount.
-// Змінній sortByDescendingFriendCount присвоєно стрілочну функцію з параметром (users).
-// Для сортування параметра users використано метод toSorted().
-// Виклик функції із зазначеним масивом users повертає новий масив користувачів, відсортований за спаданням кількості їхніх друзів.
-// Виклик з будь-якими валідними аргументами повертає правильне значення.
+// Оголошено клас StringBuilder.
+// Властивість value у класі StringBuilder оголошена приватною.
+// У класі StringBuilder оголошено методи getValue, padEnd, padStart і padBoth.
+// Метод getValue повертає значення приватної властивості value екземпляра класу, який його викликає.
+// Методи padEnd, padStart і padBoth змінюють значення приватної властивості value екземпляра класу, який його викликає.
+// У результаті виклику new StringBuilder(".") значення змінної builder — об'єкт.
+// Об'єкт builder не містить публічної властивості value.
+// Перший виклик builder.getValue() одразу після ініціалізації екземпляра повертає рядок ..
+// Другий виклик builder.getValue() після виклику builder.padStart("^") повертає рядок ^..
+// Третій виклик builder.getValue() після виклику builder.padEnd("^") повертає рядок ^.^.
+// Четвертий виклик builder.getValue() після виклику builder.padBoth("=") повертає рядок =^.^=.
 // Результати всіх викликів виведено в консоль.
